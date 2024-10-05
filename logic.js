@@ -20,23 +20,44 @@ async function search() {
             const time_zone = data.timezone;
             
             let weather_img = '';
+            let background_img = '';
 
-            if(data.weather[0].main == 'Clouds'){
+            // Set weather icon and background image based on weather condition
+            if(main == 'Clouds'){
                 weather_img = 'images/clouds.png';
+                background_img = 'url(images/clouds.gif)'; // Cloudy background
             }
-            else if(data.weather[0].main == 'Clear'){
+            else if(main == 'Clear'){
                 weather_img = 'images/Clear.png';
+                background_img = 'url(images/clear-sky.gif)'; // Clear sky background
             }
-            else if(data.weather[0].main == 'Rain'){
+            else if(main == 'Rain'){
                 weather_img = 'images/rain.png';
+                background_img = 'url(images/rain.gif)'; // Rainy background
             }
-            else if(data.weather[0].main == 'Drizzle'){
+            else if(main == 'Drizzle'){
                 weather_img = 'images/drizzle.png';
+                background_img = 'url(images/drizzle.gif)'; // Drizzle background
             }
-            else if(data.weather[0].main == 'Mist'){
+            else if(main == 'Mist'){
                 weather_img = 'images/mist.png';
+                background_img = 'url(images/mist.gif)'; // Mist background
+            }
+            else if(main == 'Fog'){
+                weather_img = 'images/mist.png';
+                background_img = 'url(images/fog.gif)'; // Mist background
+            }
+            else{
+                weather_img = 'images/clouds.png';
+                background_img = 'url(images/normal.gif)'; // Default background
             }
 
+            // Apply the background image to the body
+            document.body.style.backgroundImage = background_img;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundRepeat = 'no-repeat';
+
+            // Display weather details
             city_details.innerHTML = `
             <div class="weather-icon mb-4">
                     <img src="${weather_img}" alt="Weather Icon" class="img-fluid">
